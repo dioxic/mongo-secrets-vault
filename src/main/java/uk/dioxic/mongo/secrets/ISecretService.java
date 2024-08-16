@@ -5,14 +5,14 @@ public interface ISecretService {
     /**
      * Writes a new secret to all Colors
      * @param secretId secret identifier
-     * @param secret secret data
+     * @param secret   secret data
      */
     void write(String secretId, String secret);
 
     /**
      * Writes a new secret to all Colors
-     * @param secretId secret identifier
-     * @param secret secret data
+     * @param secretId  secret identifier
+     * @param secret    secret data
      * @param algorithm encryption algorithm
      */
     void write(String secretId, String secret, String algorithm);
@@ -53,7 +53,8 @@ public interface ISecretService {
     /**
      * Creates key vaults for all Colors.
      * If a key vault already exists it will be dropped.
+     *
+     * @param activeVault set the active vault
      */
-    void initialize();
-
+    void initialize(Color activeVault);
 }

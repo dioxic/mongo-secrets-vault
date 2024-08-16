@@ -30,7 +30,7 @@ import static com.mongodb.client.model.Indexes.ascending;
 public class SecretService implements ISecretService {
 
     private static final String DATA_KEY_ALT_NAME = "dek";
-    private static final String VAULT_DB = "csfle";
+    private static final String VAULT_DB = "keys";
     private static final String METADATA_COLLECTION = "metadata";
     private static final String VAULT_COLLECTION_SUFFIX = "_keys";
     private static final String SECRETS_COLLECTION_SUFFIX = "_secrets";
@@ -209,11 +209,12 @@ public class SecretService implements ISecretService {
     }
 
     @Override
-    public void initialize() {
+    public void initialize(Color activeVault) {
         for (Color color : Color.values()) {
             initializeKeyVault(color);
             getSecretsCollection(color).drop();
         }
+        activate(activeVault);
     }
 
     private ClientEncryption createClientEncryption(Color color) {
