@@ -4,7 +4,7 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import uk.dioxic.mongo.secrets.commands.*;
 
-@Command(name = "secrets", mixinStandardHelpOptions = true, version = "1.0", description = "MongoDB secrets CLI tool",
+@Command(name = "msv", mixinStandardHelpOptions = true, version = "1.0", description = "MongoDB secrets CLI tool",
         subcommands = {
                 ActivateCommand.class,
                 InitializeCommand.class,
