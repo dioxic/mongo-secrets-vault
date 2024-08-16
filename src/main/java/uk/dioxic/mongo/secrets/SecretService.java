@@ -60,7 +60,6 @@ public class SecretService implements ISecretService {
         for (Color color : masterKeyMap.keySet()) {
             vaultMap.put(color, createClientEncryption(color));
         }
-
     }
 
     /**
@@ -232,6 +231,8 @@ public class SecretService implements ISecretService {
     }
 
     private void initializeKeyVault(Color color) {
+        assert vaultMap.containsKey(color) : color + " not found in vault map";
+
         MongoCollection<Document> keyVaultCollection = client
                 .getDatabase(VAULT_DB)
                 .getCollection(color.name().toLowerCase() + VAULT_COLLECTION_SUFFIX);
