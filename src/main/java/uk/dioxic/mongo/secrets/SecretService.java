@@ -32,8 +32,8 @@ public class SecretService implements ISecretService {
     private static final String DATA_KEY_ALT_NAME = "dek";
     private static final String VAULT_DB = "csfle";
     private static final String METADATA_COLLECTION = "metadata";
-    private static final String VAULT_COLLECTION_SUFFIX = "_vault";
-    private static final String SECRETS_COLLECTION_PREFIX = "secrets_";
+    private static final String VAULT_COLLECTION_SUFFIX = "_keys";
+    private static final String SECRETS_COLLECTION_SUFFIX = "_secrets";
     private final MongoClient client;
     private final MongoClientSettings mongoClientSettings;
     private final Map<Color, ClientEncryption> vaultMap;
@@ -93,10 +93,6 @@ public class SecretService implements ISecretService {
     public void write(String secretId, String secret, Color color, EncryptOptions encryptOptions) {
         assert vaultMap.containsKey(color) : "No vault configured for color " + color.name();
 
-//        Document document = new Document();
-//        document.put("_id", secretId);
-//        document.put("secret", encrypt(secret, color, encryptOptions));
-
         getSecretsCollection(color).updateOne(
                 Filters.eq(secretId),
                 Updates.set("secret", encrypt(secret, color, encryptOptions)),
@@ -114,7 +110,7 @@ public class SecretService implements ISecretService {
     }
 
     private MongoCollection<Document> getSecretsCollection(Color color) {
-        return database.getCollection(SECRETS_COLLECTION_PREFIX + color.name().toLowerCase());
+        return database.getCollection(color.name().toLowerCase() + SECRETS_COLLECTION_SUFFIX);
     }
 
     @Override
