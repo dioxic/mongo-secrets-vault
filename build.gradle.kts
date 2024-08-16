@@ -34,6 +34,7 @@ dependencies {
 
 application {
     mainClass.set("uk.dioxic.mongo.secrets.Cli")
+    applicationDefaultJvmArgs = listOf("-ea")
 }
 
 tasks.test {
