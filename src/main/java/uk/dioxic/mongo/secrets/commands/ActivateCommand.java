@@ -17,15 +17,9 @@ public class ActivateCommand implements Callable<Integer> {
     @Option(names = {"--uri"}, description = "MongoDB connection string (default: ${DEFAULT-VALUE})", defaultValue = "mongodb://localhost:27017")
     private String uri;
 
-    @Option(names = {"--blue-key"}, description = "The blue master key (default: ${DEFAULT-VALUE})", defaultValue = "passwordBLUE")
-    private String blueKey;
-
-    @Option(names = {"--green-key"}, description = "The green master key (default: ${DEFAULT-VALUE})", defaultValue = "passwordGREEN")
-    private String greenKey;
-
     @Override
-    public Integer call() throws Exception {
-        var secretService = new SecretService(uri, blueKey, greenKey);
+    public Integer call() {
+        var secretService = new SecretService(uri, "passwordBLUE", "passwordGREEN");
         secretService.activate(color);
         System.out.println(color + " activated");
         return 0;
