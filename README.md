@@ -30,7 +30,7 @@ Commands:
 ```
 The master keys are not stored in plaintext. If a non-default master key was used
 
-
+The active color is persisted and stored in the `metadata` collection.
 
 ## Examples
 
@@ -76,4 +76,9 @@ Rotating the inactive vault with a new key
 > msv rotate myNewMasterKey
 Rotating secrets in BLUE vault...
 1 secrets rotated for BLUE
+```
+
+Activating a vault
+```
+msv activate BLUE 
 ```
