@@ -28,6 +28,10 @@ Commands:
   rotate    Rotate the master key for the inactive color
   write     Write a secret
 ```
+The master keys are not stored in plaintext. If a non-default master key was used
+
+
+
 ## Examples
 
 Initializing vaults for the first time with default master keys
